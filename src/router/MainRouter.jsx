@@ -1,8 +1,9 @@
 import Home from '../components/Home/Home';
 import Root from '../components/Root/Root'
 import { createBrowserRouter } from "react-router-dom";
-import Shop from '../components/Shop/Shop';
 import Error from '../components/Error/Error';
+import Products from '../components/Products/Products';
+import Login from '../components/Login/Login';
 
  const MainRouter = createBrowserRouter([
     {
@@ -15,8 +16,13 @@ import Error from '../components/Error/Error';
                 element: <Home></Home>
             },
             {
-                path: '/shop',
-                element: <Shop></Shop>
+                path: '/products',
+                element: <Products></Products>,
+                loader:() => fetch('/products.json')
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
             }
         ]
     }

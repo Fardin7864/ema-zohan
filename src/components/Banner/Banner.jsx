@@ -10,7 +10,7 @@ const Banner = () => {
                     <h3 className="text-[#1C2B35] text-6xl font-bold">New Collection For Fall</h3>
                     <p className="text-[#2A414F] text-2xl font-normal">Discover all the new arrivals of ready-to-wear collection.</p>
                 </div>
-                <Link to="/shop">
+                <Link to="/products">
                 <button className=" bg-[#FF9900] hover:bg-[#FF8000] hover:shadow-xl w-52 h-14 rounded-md"><span className="w-36 h-6 text-[#0E161A] text-2xl font-normal">SHOP NOW</span></button>
                 </Link>
                 </div>
