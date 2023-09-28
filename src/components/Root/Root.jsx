@@ -20,9 +20,11 @@ const Root = () => {
         pauseOnHover
         theme="light"
       />
-      {/* Same as */}
-      <ToastContainer />
+      <div className="mt-24">
+
       <Outlet context={products}></Outlet>
+      </div>
+      <ToastContainer />
       <Footer></Footer>
     </div>
   );

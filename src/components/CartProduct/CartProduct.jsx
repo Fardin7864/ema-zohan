@@ -1,9 +1,14 @@
 
 import { RiDeleteBin5Fill} from 'react-icons/ri'
+import { removeFromLocalStorage } from '../LocalStorage/Localstorage';
 
 const CartProduct = ({product}) => {
-    const {id, img, name, price, ratings, seller,shipping } =
+    const {id, img, name, price, shipping } =
     product;
+
+    const handleRemove = (id) => { 
+        removeFromLocalStorage(id)
+     }
 
     return (
         <div className=" border border-[#95A0A7] mt-4 rounded-lg">
@@ -16,7 +21,7 @@ const CartProduct = ({product}) => {
                 <p>Price: <span className='text-[#F99000]'>${price}</span></p>
                 <p>Shipping Charge: <span className='text-[#F99000]'>${shipping}</span></p>
             </div>
-            <div className='flex justify-center items-center text-4xl  h-auto'>
+            <div onClick={() => handleRemove(id)} className='flex justify-center items-center text-4xl  h-auto'>
                 <button className="text-red-300 rounded-full bg-red-500 p-2"><RiDeleteBin5Fill></RiDeleteBin5Fill></button>
             </div>
             </div>
