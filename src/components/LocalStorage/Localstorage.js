@@ -1,4 +1,4 @@
-import { duplicat, success } from "../Product/Product";
+import { toast } from "react-toastify";
 
 const addToLocalStorage = (id) =>{
     const savedCart = getFromLocalStorage();
@@ -29,5 +29,31 @@ const getFromLocalStorage = () => {
     }
     else return [];
  }
+
+ const success = () =>{
+    toast('🦄 Successfully add to cart!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+   }
+   const duplicat = () =>{
+    toast('🦄 Already added this produc!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+   }
+  
 
  export {addToLocalStorage, getFromLocalStorage, removeFromLocalStorage};

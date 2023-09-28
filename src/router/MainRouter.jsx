@@ -5,6 +5,8 @@ import Error from '../components/Error/Error';
 import Products from '../components/Products/Products';
 import Login from '../components/Login/Login';
 import OrderReview from '../components/OrderReview/OrderReview';
+import SignIn from '../components/SignIn/SignIn';
+import UserAccount from '../components/UserAccount/UserAccount';
 
  const MainRouter = createBrowserRouter([
     {
@@ -24,7 +26,17 @@ import OrderReview from '../components/OrderReview/OrderReview';
             },
             {
                 path: '/login',
-                element: <Login></Login>
+                element: <UserAccount></UserAccount>,
+                children: [
+                    {
+                        path: '/login',
+                        element:<SignIn></SignIn>
+                    },
+                    {
+                        path: '/login/login',
+                        element: <Login></Login>
+                    }
+                ]
             },
             {
                 path: '/orderreview',
