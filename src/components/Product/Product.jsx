@@ -1,14 +1,53 @@
 import Rating from "react-rating";
 import {AiOutlineStar,AiFillStar} from "react-icons/ai"
-import { addToLocalStorage } from "../LocalStorage/Localstorage";
+import { addToLocalStorage, getFromLocalStorage } from "../LocalStorage/Localstorage";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Product = ({ product }) => {
   const {id, img, name, price, ratings, seller } =
     product;
 
-    const handleAddCart = (id) => { 
-      addToLocalStorage(id);
+    const handleAddCart = (id) => {
+      const savedProducts = getFromLocalStorage()
+      console.log(savedProducts)
+      const exist = savedProducts.find(product => product === id)
+      console.log(exist)
+      if (!exist) {
+        success();
+        addToLocalStorage(id);
+        console.log('success')
+      }
+      else if (exist) {        
+        duplicat();
+        console.log('duplicat')
+      }
      }
+     const success = () =>{
+      toast('🦄 Successfully add to cart!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+     }
+     const duplicat = () =>{
+      toast('🦄 Already added this produc!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+     }
+
 
   return (
     <div className="card bg-base-100 shadow-xl">
