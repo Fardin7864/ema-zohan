@@ -4,6 +4,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Error from '../components/Error/Error';
 import Products from '../components/Products/Products';
 import Login from '../components/Login/Login';
+import OrderReview from '../components/OrderReview/OrderReview';
 
  const MainRouter = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ import Login from '../components/Login/Login';
             {
                 path: '/login',
                 element: <Login></Login>
+            },
+            {
+                path: '/orderreview',
+                element: <OrderReview></OrderReview>
             }
         ]
     }

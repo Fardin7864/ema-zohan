@@ -2,7 +2,7 @@ import Rating from "react-rating";
 import {AiOutlineStar,AiFillStar} from "react-icons/ai"
 
 const Product = ({ product }) => {
-  const { category, img, name, price, ratings, ratingsCount, seller, stock } =
+  const { img, name, price, ratings, seller } =
     product;
 
   return (
