@@ -1,9 +1,14 @@
 import Rating from "react-rating";
 import {AiOutlineStar,AiFillStar} from "react-icons/ai"
+import { addToLocalStorage } from "../LocalStorage/Localstorage";
 
 const Product = ({ product }) => {
-  const { img, name, price, ratings, seller } =
+  const {id, img, name, price, ratings, seller } =
     product;
+
+    const handleAddCart = (id) => { 
+      addToLocalStorage(id);
+     }
 
   return (
     <div className="card bg-base-100 shadow-xl">
@@ -28,7 +33,7 @@ const Product = ({ product }) => {
             </p>
         </div>
         <div className="card-actions justify-end">
-        <div className="w-full flex justify-center items-center h-12 bg-[#FFE0B3] rounded-br-lg rounded-bl-lg">
+        <div onClick={() => handleAddCart(id)}  className="w-full btn flex justify-center items-center h-12 bg-[#FFE0B3] rounded-br-lg rounded-bl-lg">
           <button>Add to Cart </button>
         </div>
         </div>

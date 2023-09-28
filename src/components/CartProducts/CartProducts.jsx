@@ -1,11 +1,27 @@
+import { useOutletContext } from "react-router-dom";
 import CartProduct from "../CartProduct/CartProduct";
 import { AiFillDelete, AiFillCreditCard } from "react-icons/ai";
+import { getFromLocalStorage } from "../LocalStorage/Localstorage";
+import { useEffect, useState } from "react";
 
 const CartProducts = () => {
+    const [products , setProducts] = useState();
+    const allProducts = useOutletContext();
+    const savedProducts = getFromLocalStorage();
+    useEffect(() => { 
+        const toDisplayProduct = allProducts.filter(product => savedProducts.includes(product.id));
+        setProducts(toDisplayProduct);
+     },[])
+    //  console.log(products)
   return (
     <>
       <div>
-        <CartProduct></CartProduct>
+        {
+            products?.map(product => <CartProduct
+            key={product.id}
+            product={product}
+            ></CartProduct>)
+        }        
       </div>
       <div className="bg-[#ff99004d] w-1/3 rounded-xl my-5">
         <div className="px-5">

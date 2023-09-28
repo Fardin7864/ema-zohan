@@ -11,6 +11,7 @@ import OrderReview from '../components/OrderReview/OrderReview';
         path: '/',
         element: <Root></Root>,
         errorElement:<Error></Error>,
+        loader: () => fetch('/products.json'),
         children: [
             {
                 path: '/',
