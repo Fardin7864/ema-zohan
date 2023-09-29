@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { AiFillGithub } from "react-icons/ai";
+import { AiFillGithub,AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 
 import {
@@ -13,12 +13,23 @@ import {
 } from "firebase/auth";
 import app from "../../fire-base/firebase.init";
 import { useState } from "react";
+// import { signal } from "@preact/signals";
 
 const SignIn = () => {
   const [user, setUser] = useState(null);
   const [errorMsg, setErrorMsg] = useState();
   const [successMsg, setSuccessMsg] = useState();
+  const [showPass, setShowPass] = useState(false);
+  // const showPass = signal(false);
+
+ const handlePass = () => { 
+  // showPass.value = !showPass.value
+  setShowPass(!showPass)
+  console.log(showPass.value)
+  }
+
   const auth = getAuth(app);
+
   // setErrorMsg('');
   // Google authantication
   const provider = new GoogleAuthProvider();
@@ -52,17 +63,19 @@ const SignIn = () => {
       createUserWithEmailAndPassword(auth, email, password)
       .then(result => {
         setUser(result.user);
-        setSuccessMsg('Please check you email and veryfi it!')
         sendEmailVerification(auth.currentUser)
-        .then(result => {
-          console.log(result, 'email send')
+        .then(() => {
+          setSuccessMsg('Please check you email and verify it!')
         })
         e.target.email.value = '';
         e.target.password.value = '';
       })
       .catch(err => {
-        console.log(err.message)
-        e.target.password.value = '';
+        if(err.message === "Firebase: Error (auth/email-already-in-use).")
+        {
+          setErrorMsg('This email already in use!')
+        }
+        // e.target.password.value = '';
       })  
 
     }
@@ -81,25 +94,28 @@ const SignIn = () => {
               <input
                 type="email"
                 name="email"
-                id=""
+                id="email"
                 required
                 className="border-2 text-2xl border-[#95A0A7] rounded-md h-14 w-4/5"
               />
               <p className="text-base font-normal text-[#2A414F]">Password: </p>
               <input
-                type="password"
+                type={showPass && 'text' || 'password'}
                 name="password"
-                id=""
+                id="pass"
                 required
                 className="border-2 text-2xl border-[#95A0A7] rounded-md h-14 w-4/5"
               />
+              <p onClick={handlePass} className="relative -top-[54px] -right-64 text-xl">
+              {
+                showPass === false && <AiFillEyeInvisible></AiFillEyeInvisible> || showPass === true && <AiFillEye></AiFillEye>
+              }
+              </p>
               {
                 errorMsg && <p className="text-base font-normal text-red-600">{errorMsg}</p> || ''
-
               }
               {
                 successMsg && <p className="text-base font-normal text-green-600">{successMsg}</p> || ''
-
               }
                 {/* <input type="password" name="" id=""  className="border-2 text-2xl border-[#95A0A7] rounded-md h-14 w-4/5"/> */}
               <input
