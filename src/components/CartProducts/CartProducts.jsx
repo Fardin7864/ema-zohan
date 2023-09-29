@@ -5,16 +5,20 @@ import { getFromLocalStorage } from "../LocalStorage/Localstorage";
 import { useEffect, useState } from "react";
 
 const CartProducts = () => {
+  const [toRender, setToRender] = useState(false);
   const [products, setProducts] = useState([]);
   const allProducts = useOutletContext();
   const savedProducts = getFromLocalStorage();
   const [showAll, setShowAll] = useState(false);
+  const handleRender = ()=>{
+    setToRender(!toRender)
+  }
   useEffect(() => {
     const toDisplayProduct = allProducts.filter((product) =>
       savedProducts.includes(product.id)
     );
     setProducts(toDisplayProduct);
-  }, [savedProducts]);
+  }, [toRender]);
   const handleShowAll = () => {
     setShowAll(!showAll);
   };
@@ -33,7 +37,7 @@ const CartProducts = () => {
       <div className="flex justify-center gap-4">
         <div className="px-3">
           {toDisplay?.map((product) => (
-            <CartProduct key={product.id} product={product}></CartProduct>
+            <CartProduct key={product.id} product={product} handleRender ={handleRender}></CartProduct>
           ))}
         </div>
         <div className="bg-[#ff99004d] w-1/3 h-5/6 rounded-xl my-5">

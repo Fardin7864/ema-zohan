@@ -1,8 +1,7 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
-import app from "../../fire-base/firebase.init";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { AuthContext } from "../../providers/AuthContext";
 
 
 
@@ -13,14 +12,12 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState();
   const [successMsg, setSuccessMsg] = useState();
   const [showPass, setShowPass] = useState(false);
+  const{ signIn} = useContext(AuthContext);
 
   const handlePass = () => { 
     // showPass.value = !showPass.value
     setShowPass(!showPass)
     }
-
-  const auth = getAuth(app);
-
   const handleSubmit = (e) => { 
     e.preventDefault();
     setErrorMsg('');
@@ -33,11 +30,10 @@ const Login = () => {
       return;
     }
     else{
-    signInWithEmailAndPassword(auth,email,password)
+    signIn(email,password)
     .then(result => {
 
       const user = result.user;
-      console.log(user)
       if (!user.emailVerified) {
         setErrorMsg("Please check your email and verify it!!")
       }else if (user.emailVerified) {

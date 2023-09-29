@@ -12,7 +12,8 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import app from "../../fire-base/firebase.init";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../providers/AuthContext";
 // import { signal } from "@preact/signals";
 
 const SignIn = () => {
@@ -20,6 +21,9 @@ const SignIn = () => {
   const [errorMsg, setErrorMsg] = useState();
   const [successMsg, setSuccessMsg] = useState();
   const [showPass, setShowPass] = useState(false);
+
+  // context
+  const {createUser } = useContext(AuthContext);
   // const showPass = signal(false);
 
  const handlePass = () => { 
@@ -60,9 +64,12 @@ const SignIn = () => {
       return;
     }
     else{
-      createUserWithEmailAndPassword(auth, email, password)
+      // createUserWithEmailAndPassword(auth, email, password)
+      createUser(email, password)
       .then(result => {
-        setUser(result.user);
+        const users = result.user
+        setUser(users);
+        // updateState(users)
         sendEmailVerification(auth.currentUser)
         .then(() => {
           setSuccessMsg('Please check you email and verify it!')
@@ -80,7 +87,7 @@ const SignIn = () => {
 
     }
   };
-  console.log(user)
+  // console.log(userC)
 
   return (
     <div className="my-36 flex flex-col justify-center items-center ">
@@ -126,7 +133,7 @@ const SignIn = () => {
               />
               <p className="text-base font-normal text-[#2A414F]">
                 Already have account?{" "}
-                <Link to="/login/login" className="text-yellow-400">
+                <Link to="/login" className="text-yellow-400">
                   Login
                 </Link>
               </p>

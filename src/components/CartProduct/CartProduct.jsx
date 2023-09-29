@@ -2,12 +2,13 @@
 import { RiDeleteBin5Fill} from 'react-icons/ri'
 import { removeFromLocalStorage } from '../LocalStorage/Localstorage';
 
-const CartProduct = ({product}) => {
+const CartProduct = ({product,handleRender}) => {
     const {id, img, name, price, shipping } =
     product;
 
     const handleRemove = (id) => { 
         removeFromLocalStorage(id)
+        handleRender();
      }
 
     return (
