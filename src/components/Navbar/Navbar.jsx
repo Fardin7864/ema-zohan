@@ -11,7 +11,29 @@ const Navbar = () => {
     .catch((err) => console.log(err.message))
   }
 
-  const displayName = userC ? userC.email : null;
+  const {displayName } = userC ? userC : {} ;
+
+  const navLinks = <>
+            <li>
+             <NavLink to="/products">Order</NavLink>
+            </li>
+          <li>
+            <NavLink to="/orderreview">Order Review</NavLink>
+          </li>
+          <li>
+            <NavLink to="/profile">Profile</NavLink>
+          </li>
+          <li>
+            <NavLink to="/inventory">Manage Inventory</NavLink>
+          </li>
+          <li>
+            {
+              !userC && <NavLink to="/login/login">Login</NavLink> || <NavLink onClick={handleLogOut} >{displayName && displayName}<span className="text-red-400">Sign Out</span></NavLink>
+            }
+          </li>
+          </>
+
+
   return (
     <div className="navbar bg-[#1C2B35] fixed top-0 z-50">
       <div className="navbar-start">
@@ -36,18 +58,7 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-            <NavLink to="/products">Order</NavLink>
-          </li>
-          <li>
-            <NavLink to="/orderreview">Order Review</NavLink>
-          </li>
-          <li>
-            <NavLink to="/inventory">Manage Inventory</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
+           {navLinks}
           </ul>
         </div>
         <Link to="/" className="flex flex-col gap-1">
@@ -60,20 +71,9 @@ const Navbar = () => {
       </div>
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1 gap-2">
-          <li>
-            <NavLink to="/products">Order</NavLink>
-          </li>
-          <li>
-            <NavLink to="/orderreview">Order Review</NavLink>
-          </li>
-          <li>
-            <NavLink to="/inventory">Manage Inventory</NavLink>
-          </li>
-          <li>
             {
-              !userC && <NavLink to="/login/login">Login</NavLink> || <NavLink onClick={handleLogOut} >{displayName}Sign Out</NavLink>
+              navLinks
             }
-          </li>
         </ul>
       </div>
     </div>

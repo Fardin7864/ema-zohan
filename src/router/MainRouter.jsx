@@ -7,6 +7,8 @@ import Login from '../components/Login/Login';
 import OrderReview from '../components/OrderReview/OrderReview';
 import SignIn from '../components/SignIn/SignIn';
 import UserAccount from '../components/UserAccount/UserAccount';
+import PrivetRoute from '../components/PrivetRout/PrivetRoute';
+import Profile from '../components/Profile/Profile';
 
  const MainRouter = createBrowserRouter([
     {
@@ -40,7 +42,11 @@ import UserAccount from '../components/UserAccount/UserAccount';
             },
             {
                 path: '/orderreview',
-                element: <OrderReview></OrderReview>
+                element: <PrivetRoute><OrderReview></OrderReview></PrivetRoute>
+            },
+            {
+                path: '/profile',
+                element: <PrivetRoute><Profile></Profile></PrivetRoute>
             }
         ]
     }

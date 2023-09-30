@@ -25,3 +25,8 @@ ul li a:hover{
     border: 2px solid white;
 
 }
+ul li a:focus{
+  background: none !important;
+  color: #FFF !important;
+  border: 2px solid white;
+}

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { AuthContext } from "../../providers/AuthContext";
@@ -13,6 +13,7 @@ const Login = () => {
   const [successMsg, setSuccessMsg] = useState();
   const [showPass, setShowPass] = useState(false);
   const{ signIn} = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handlePass = () => { 
     // showPass.value = !showPass.value
@@ -40,6 +41,7 @@ const Login = () => {
         setSuccessMsg("You are loged In successfully!")
         e.target.email.value = '';
         e.target.password.value = '';
+        navigate( "/profile");
       }
     })
     .catch(err => {

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub,AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
@@ -21,9 +21,10 @@ const SignIn = () => {
   const [errorMsg, setErrorMsg] = useState();
   const [successMsg, setSuccessMsg] = useState();
   const [showPass, setShowPass] = useState(false);
+  const navigate = useNavigate();
 
   // context
-  const {createUser } = useContext(AuthContext);
+  const {createUser, updateState } = useContext(AuthContext);
   // const showPass = signal(false);
 
  const handlePass = () => { 
@@ -39,14 +40,19 @@ const SignIn = () => {
   const provider = new GoogleAuthProvider();
   const handleWithGoogle = () => {
     signInWithPopup(auth, provider)
-      .then((result) => setUser(result.user))
+      .then((result) => {
+        navigate("/profile")
+        updateState(result.user)})
       .catch((err) => console.log(err.message));
   };
   // Github authantication
   const gitProvider = new GithubAuthProvider();
   const handlewithGithub = () => {
     signInWithPopup(auth, gitProvider)
-      .then((result) => setUser(result.user))
+      .then((result) => {
+        updateState(result.user)
+        navigate("/profile")
+      })
       .catch((err) => console.log(err.message));
   };
   // Email authantication
@@ -133,7 +139,7 @@ const SignIn = () => {
               />
               <p className="text-base font-normal text-[#2A414F]">
                 Already have account?{" "}
-                <Link to="/login" className="text-yellow-400">
+                <Link to="/login/login" className="text-yellow-400">
                   Login
                 </Link>
               </p>
