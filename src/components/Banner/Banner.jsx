@@ -17,7 +17,7 @@ const Banner = () => {
             </div>
             <div className="">
                 <div className="w-[430px] h-[633px] absolute rounded-lg -z-10 bg-[#FFE0B3]"></div>
-                <div className="w-[451px] h-[633px] rounded-lg z-10 relative -right-7 -top-7"><img src="../../../public/fontimg.jpg" alt="" className="h-full rounded-lg "/></div>
+                <div className="w-[451px] h-[633px] rounded-lg z-10 relative -right-7 -top-7"><img src={`https://i.ibb.co/HzFqDWn/fontimg.jpg`} alt="" className="h-full rounded-lg "/></div>
             </div>
         </div>
     );
